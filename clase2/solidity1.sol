@@ -78,6 +78,7 @@ contract test{
     }
 
     // Devolver todo el aray myInfoArray (el default getter no me devuelve todo el array, esto si)
+
     function getMyInfoArray() external view returns (Person[] memory) {
         return myInfoArray;
     }
@@ -118,7 +119,7 @@ contract test{
         }
     }
 
-// vimos hasta aca el 17/1/2023
+// vimos hasta aca
 
     //Enumeraciones y manejo de estados
     enum Estado{ // Maxio puede tener 256 miembros y eso es porque está contenido en un unit8
@@ -171,6 +172,56 @@ contract test{
         }
     }
 
+    // Propiedades de bloques
+    function bloque() view external returns(uint256,uint256,uint256,address){
+        return (block.difficulty, block.gaslimit, block.number, block.coinbase);
+    }
+
+    //Valor pseudo Aleatorio (Por que no usarlo como aleatorio?)
+    function random() view external returns(uint256){
+        uint256 _aleatorio = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty))) % 100;
+        return (_aleatorio);
+    }
+
+    // Propiedades de transaccion
+    function transaccion() external view returns (uint256, address) {
+        return(tx.gasprice, tx.origin); // ver pagina 17 del modulo 2
+    }
+
+    //propiedades de mensajes
+    function mensaje() external view returns(bytes memory,uint256,bytes4){
+        uint256 a = gasleft(); // msg.gas fue deprecada
+        return (msg.data, a, msg.sig);
+    }
+    function valueSent() external payable returns(uint256){
+        return (msg.value);
+    }
+
+    // destruir contrato: No se aconseja utilizarlo pero se muestra porque puede aparecer en contratos viejos
+    function destroy() external {
+        selfdestruct( payable(msg.sender) );
+    }
+
+    //revert vs require:probar con 7.1
+    function revertir(bool _choice) external {
+        if(_choice) {
+            assert(1==0);
+        }
+        else {
+            require(1==0, "1 no es igual a 0");
+        }
+        counter++; // Lo puse solo para que me cobre el gas
+        // revert lo vimos con el <address>.send
+        // throw() esta deprecado hace tiempo
+    }
+
+    //arrays variables en memoria. Siempre deben ser fijos, aunque pueda hacerse en tiempo de ejcucion.
+    function varArrMem(uint256 _i) external pure returns(uint256[] memory,uint256) {
+        uint256[] memory hola = new uint256[](_i);
+        hola[0]=1;
+        hola[1]=2;
+        return (hola,hola.length); // probar que pasa al mandarle a _i= (1;2;10)
+    }
 
 }
 
