@@ -1,0 +1,39 @@
+JSON-RPC
+
+0) Documentacion:
+//https://ethereum.github.io/execution-apis/api-documentation/
+https://ethereum.org/es/developers/docs/apis/json-rpc/#eth_blocknumber
+
+1) Ejemplo de llamada a un json-rpc. Version (WSL):
+curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":"67"}' https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79
+curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":"67"}' https://bsc-dataseed.binance.org/
+curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":"67"}' https://rpc.ankr.com/eth_goerli
+
+2) calcular un sha3
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c6f20776f726c64"],"id":64}' https://bsc-dataseed.binance.org/
+
+3)¿Por que tiene el campo ID?
+
+4) Numero de bloques:
+
+Binance:
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' https://bsc-dataseed.binance.org/
+
+Goerli:
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' https://rpc.ankr.com/eth_goerli
+
+5) ¿Por qué son iguales las llamadas a binance y a goerli?
+
+6) Balance en WEI de una cuenta
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x2684e385622856451E97d7298Fa7fE3cccf062d1", "latest"],"id":1}' https://rpc.ankr.com/eth_goerli
+
+7) Ejemplo de envío de una transacción:
+https://etherscan.io/tx/0x415c1c3461d24cdd42ac0f126dd922fd9db7f09c96a545e0f99529e616432946
+
+8) Implementación rustica del protocolo en php:
+https://github.com/DigiCris/web3PhpLib
+
+9) Web3.js implementa la documentación en javascript: (chismes, estados, historicos)
+

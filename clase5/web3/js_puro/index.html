@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="./web3.min.js"></script>
+	<script>
+
+
+var address;
+
+async function connect()
+{
+	const web3 = new Web3(window.ethereum); // Para usar el provider que inyecta metamask y la librería de web3
+	await ethereum.request({ method: 'eth_requestAccounts'});
+	address = await web3.eth.getAccounts().then( (res) => document.getElementById('account').innerHTML=res );
+}
+
+function otherFunctions()
+{
+	const web3 = new Web3(window.ethereum);// Para usar el provider que inyecta metamask y la librería de web3
+	web3.eth.isMining().then(console.log);
+}
+
+function sendEth()
+{
+	const web3 = new Web3(window.ethereum);//Para usar el provider que inyecta metamask y la librería de web3
+	web3.eth.sendTransaction({ from: address[0], to: '0x2684e385622856451E97d7298Fa7fE3cccf062d1', value: '40000000000000000' })
+		.on('transactionHash', function(hash){ console.log( "hash= " + hash ) })
+		.on('receipt', function(receipt){ console.log("receipt= " + receipt); })
+		.on('confirmation', function(confirmationNumber, receipt){ console.log("confirmationNumber= " + confirmationNumber + "   receipt= " +  receipt); })
+		.on('error', console.error); // Si hay un error el receipt será el segundo parametro.
+}
+
+function deployCode()
+{
+	const web3 = new Web3(window.ethereum);// Para usar el provider que inyecta metamask y la librería de web3
+	// El código fue compilado con truffle (myCode1)... deployado a 0xcc0d257212ab81ae4411ca3ad87e44b2728b8313
+	var code="0x608060405234801561001057600080fd5b5061017f806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80632f048afa1461004657806357de26a414610062578063975057e714610080575b600080fd5b610060600480360381019061005b91906100cc565b61009e565b005b61006a6100a8565b6040516100779190610108565b60405180910390f35b6100886100b1565b6040516100959190610108565b60405180910390f35b8060008190555050565b60008054905090565b60005481565b6000813590506100c681610132565b92915050565b6000602082840312156100e2576100e161012d565b5b60006100f0848285016100b7565b91505092915050565b61010281610123565b82525050565b600060208201905061011d60008301846100f9565b92915050565b6000819050919050565b600080fd5b61013b81610123565b811461014657600080fd5b5056fea2646970667358221220f4d10aeddf72e116e9b1a414b6771ab7a285d593b491fc7cbb45a1daec7bd14364736f6c63430008070033";
+	web3.eth.sendTransaction({ from: address[0], data: code })
+		.on('transactionHash', function(hash){ console.log( "hash= " + hash ) })
+		.on('error', console.error); // Si hay un error el receipt será el segundo parametro.
+}
+
+function writeToCode()
+{
+	const web3 = new Web3(window.ethereum);// Para usar el provider que inyecta metamask y la librería de web3
+	// El código fue compilado con truffle (myCode1)... deployado a 0xcc0d257212ab81ae4411ca3ad87e44b2728b8313
+	var code="0x2f048afa0000000000000000000000000000000000000000000000000000000000000005";
+	web3.eth.sendTransaction({ from: address[0], to: "0xcc0d257212ab81ae4411ca3ad87e44b2728b8313", data: code , gas: 3000000 })
+		.on('transactionHash', function(hash){ console.log( "hash= " + hash ) })
+		.on('error', console.error); // Si hay un error el receipt será el segundo parametro.
+}
+//tanto deployCode y writeCode están hechos rusticamente para mostrar concepto, no es que lo vayamos a hacer así en realidad.
+
+
+
+// ahora vamos a mostrar como si interactuamos con los contratos
+//definimos la direccion del contrato con el que queremos interactuar
+var contract_addr='0x7E84215C62e649870846445a0d871149E7240229'; // pueden buscarlo en goerli scan, fue desplegado con remix
+//definimos el ABI del contrato para que web3js sepa como es la interface
+var abi=[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "buy",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "claim",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "ticket",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+// usando la direccion del contrato y el abi interactuamos
+async function lectura()
+{
+	const web3 = new Web3(window.ethereum);// Para usar el provider que inyecta metamask y la librería de web3
+	ticket_contract= new web3.eth.Contract(abi,contract_addr);
+	console.log(ticket_contract);
+	ticket_contract.methods.ticket(address[0]).call().then( (r)=>{alert("usted tiene "+r+" tickets");} );
+}
+// usando la direccion del contrato y el abi interactuamos
+async function escritura()
+{
+	const web3 = new Web3(window.ethereum);// Para usar el provider que inyecta metamask y la librería de web3
+	ticket_contract= new web3.eth.Contract(abi,contract_addr);
+	console.log(ticket_contract);
+	ticket_contract.methods.buy().send({value: '100000000000000000', from: address[0] })
+		.on('transactionHash', function(hash){ console.log( "hash= " + hash ) })
+		.on('receipt', function(receipt){ console.log(receipt); })
+		.on('confirmation', function(confirmationNumber, receipt){ console.log("confirmationNumber= " + confirmationNumber ); })
+		.on('error', console.error); // If a out of gas error, the second parameter is the receipt.
+}
+
+function miscelaneous()
+{
+	const web3 = new Web3(window.ethereum);// Para usar el provider que inyecta metamask y la librería de web3
+	web3.eth.personal.newAccount('superpassword').then(console.log);
+}
+
+	</script>
+</head>
+<body>
+
+
+En la siguiente pagina se muestran conceptos basicos de utilización de la libreria de web3 integrandolo con el injected provider de metamask. Cada boton llama a una funcion que realiza
+una actividad con la librería de web3 y es importante de observar en consola lo que pasa mientras se observa que hace el codigo.
+Recomendamos conectarse a Goerli haber pedido de la Faucet primero alguno test eth de la misma.
+
+Es importante destacar que él injected provider de metamask no funcionará si la página es local en sus máquinas por lo que deben subirla a un servidor, o armar uno usedes para abirla.
+En mi caso e inicilaizado xaamp y corrido la misma dentro de htdocs llamando directamente en la url a localhost.
+<br><br><br>
+<label id="account"></label>
+<button id="conect" onclick="connect()">conectar</button><br>
+<button id="conect" onclick="sendEth()">enviar eth</button><br>
+<button id="conect" onclick="deployCode()">deploy smart contract</button><br>
+<button id="conect" onclick="writeToCode()">escribir smart contract</button><br>
+<button id="conect" onclick="lectura()">lectura contrato</button><br>
+<button id="conect" onclick="escritura()">Escritura contrato segunda forma</button><br>
+<button id="conect" onclick="miscelaneous()">miscelaneous</button><br>
+
+
+</body>
+</html>
