@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="./contractData.js"></script>
+	<script src="./web3.min.js"></script>
+	<script src="./scripts.js"></script>
+	<script src="./contractInteraction.js"></script>
+</head>
+<body>
+
+<label id="account"></label>
+<button id="conect" onclick="connect()">conectar</button><br>
+
+  <div id='swap-box'>
+    <div id="swap-menu">
+      <label class="token">EIT</label> to <label class="token">ETH</label>
+    </div>
+
+    <div id="swap-title-box">
+		  <p id="swap-title">Swap</p>
+		  <p id="swap-subtitle">Trade tokens in an instant</p>
+	  </div>
+
+    <div id="swap-form-box">
+      <div id='form' onSubmit='handleSubmit()'>
+
+        <label>
+          <img id="alineadoTextoImagenCentro" src='./EIT.png' class="logo" /> <label class="token">EIT</label>
+          <div class="swap-balance pick-balance" onClick='{()=>setTokenToSpend(Change?tokenBalance:(nearBalance-0.01) )}'>Balance: <label class="balance">5</label></div>
+        </label>
+
+        <input onChange='setValueTokenToSpend()' type="text" class="IHAVE" placeholder="0.0"></input>
+
+        <label id="swap-arrow"><div onClick='swap()'>🡣</div></label>
+
+        <label>
+        <img id="alineadoTextoImagenCentro" src='./ETH.png' class="logo"/><label class="token">ETH</label>
+          <div class="swap-balance">Balance: <label class="balance">4</label></div>
+        </label>
+
+        <input onChange='setValueTokenToReceive()' type="text" class="IWANT" placeholder="0.0"></input>
+
+        <div className="separador-vertical"></div>
+
+        <label id="swap-price-word">Price 
+          <div id="swap-price">
+            TOKEN_PRICE <label class="precio">0.1</label>
+          </div>
+        </label>
+
+        
+        <button id="swap-submit" name="submit" onclick="handleSubmit()">Swap</button>
+        
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
