@@ -1,0 +1,27 @@
+Optimizacion
+https://github.com/Rari-Capital/golf-course/tree/some-tips-to-start
+
+contratos varios
+https://github.com/jamesbachini/Solidity-Snippets/tree/main/contracts
+
+seguridad
+https://consensys.github.io/smart-contract-best-practices/
+
+Journey to become a blockchain engineer
+https://github.com/spo0ds/Journey-to-become-a-Blockchain-Engineer
+
+openzeppelin utility
+https://docs.openzeppelin.com/contracts/4.x/api/utils
+
+Jobs
+https://bankless.pallet.com/jobs
+https://gitcoin.co/explorer?network=mainnet&idx_status=open&applicants=ALL&order_by=-web3_created
+
+mas recursos
+https://docs.ethernautdao.io/resources/resources
+
+Smart contracts auditados
+https://docs.openzeppelin.com/contracts/4.x/api/utils
+
+Libros varios recopilados
+https://drive.google.com/drive/folders/1PNGreua133pNpmw2wdWEpE1J9B-Wwqoo?usp=sharing

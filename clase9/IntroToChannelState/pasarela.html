@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!– Acuerdence que para que funcione esto debe estar levantado en un servidor ya sea local o subido a alguno en la nube –>
+	<title></title>
+	<script src="./web3.min.js"></script>
+	<script>
+
+var address;
+var web3;
+var firma;
+
+async function connect()
+{
+	web3 = new Web3(window.ethereum); // Para usar el provider que inyecta metamask y la librería de web3
+	await ethereum.request({ method: 'eth_requestAccounts'});
+	address = await web3.eth.getAccounts().then( (res) => document.getElementById('account').innerHTML=res );
+}
+
+var firma;
+
+async function sign()
+{// 0xDE2F9a0FE7813BCC36226cf450aB780e09D719ad,1,1    => (address,value,nonce)   => solo un ejemplo
+	let amount= await document.getElementById('amount').value;
+	let to= await document.getElementById('to').value;
+	let nonce= await document.getElementById('nonce').value;
+	let hash=await web3.utils.soliditySha3({type: 'uint', value: amount},{type: 'address', value: to},{type: 'uint', value: nonce});
+	console.log('hash= '+hash);// 0x8b939d18a1d2a152f82a5edb0af94e6b4bdb4b959f6f4863e73fa77931519371
+	firma= await web3.eth.personal.sign(hash.toString(), address.toString());
+	console.log('firma= '+firma);// 0x0bd853246560525c25953984367b930d18d5fd396923c0a22e16eed4e8433ea417b8a13adde040f373bb13e258ff650f05ee8f7f40d286465a9bf89a547333f01b
+}
+
+async function recover()
+{
+	let signMsg= await document.getElementById('signMsg').value ;
+	let amount= await document.getElementById('amount').value;
+	let to= await document.getElementById('to').value;
+	let nonce= await document.getElementById('nonce').value;
+	let hash=await web3.utils.soliditySha3({type: 'uint', value: amount},{type: 'address', value: to},{type: 'uint', value: nonce});
+	alert(hash);
+	web3.eth.personal.ecRecover(hash, signMsg).then(console.log);
+
+}
+
+	</script>
+</head>
+<body>
+
+
+<br><br><br>
+<label id="account"></label>
+<button id="conect" onclick="connect()">conectar</button><br>
+<input type="text" id="amount" placeholder="amount">
+<input type="text" id="to" placeholder="reciever address">
+<input type="text" id="nonce" placeholder="nonce">
+<button id="conect" onclick="sign()">Firmar</button><br>
+<input type="text" id="signMsg" placeholder="signMsg">
+<button id="recover" onclick="recover()">recobrar</button><br>
+
+
+</body>
+</html>
