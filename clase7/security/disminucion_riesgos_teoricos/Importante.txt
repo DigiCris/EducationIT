@@ -1,0 +1,3 @@
+El nombre de la carpeta es teorico porque el funcionamiento de estos contratos no están checkeados.
+
+Solo fueron programados para que se pueda entender los conecptos de cada uno de estos métodos existentes.

@@ -1,0 +1,19 @@
+En este video explico un caso de un smart contract que se Adjudicaba front runing lo cual es una técnica conocida
+pero en realidad estaba robandoles a quien lo utilizaba. Es de recalcar que un smart contract no puede correr
+indefinidamente como se propone acá, ya que por causa del gas, en algún momento se terminaría.
+
+https://www.youtube.com/watch?v=XvGc8iGS2FE
+
+
+
+
+En este otro video explico un tema sucedido hace un tiempo en que se cambiaba la dirección de las personas con una
+extesion maliciosa para robar dinero.
+
+https://www.youtube.com/watch?v=HR5uOoQnRH8
+
+
+
+Checklist para mantener una buena seguridad:
+
+https://github.com/Lissy93/personal-security-checklist

@@ -1,0 +1,2 @@
+En este video se crea una ITO y un Token ERC20 por lo cual les puede ayudar si no saben por donde empezar a resolver
+https://www.youtube.com/watch?v=NvLlnVLRX6Q

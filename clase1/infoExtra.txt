@@ -1,0 +1,18 @@
+Nota: Cuando los videos usen código, en la descripción podrán encontrar el link al github.
+
+
+		Cryptografía
+
+Video del taller = https://youtu.be/lEX-yyiTHRY
+Reto propuesto   = https://curso-blockchain.tk/tarea2/
+
+
+		Blockchain
+
+Utilidad para entender conceptos de blockchain = https://andersbrownworth.com/blockchain/hash
+
+
+		Creación de criptomoneda minable + Uso de Metamask y otras wallets
+
+Lista de reproduccion (50 min) = https://www.youtube.com/playlist?list=PL5b3e4da2IHBvjQkNlx0IeAl2sFx79D0r
+
