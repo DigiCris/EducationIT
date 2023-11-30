@@ -1,0 +1,49 @@
+Contrato 1 de entradas:
+
+1) Una estructura Person que contenga Id, Nombre y Cantidad.
+
+2) Un Mapeao desde el address del dueño de la entrada apuntando a la estructura Person en que la variable se llame cliente.
+
+3) Si el cliente adquiere más de 2 entradas adquiere una entrada de lotería que estará en otro contrato (contrato 2).
+
+4) Si el owner del contrato quiere puede comprar entradas asignandoselas a distintas personas (en batch) pero no participarán del sorteo.
+
+5) Permitir cambiar la primera letra del nombre de tu persona por mayuscula si está en minuscula.
+
+6) Si una función que se llame en este contrato no existe deberá llamar al contrato de loteria y buscar la misma función (ej: ver el ganador de la lotería)
+
+
+
+Contrato 2 de lotería:
+
+1) Estruct Person pero cambia id por wallet (para poder repartir el premio si lo gana)
+
+2) Array del tipo Person clientesLujo
+
+3) Variable ganador
+
+4) variable semaforo usando enum como verde y rojo.
+
+5) Variable de fecha para el sorteo. (Solo se permitirá realizarlo después de que este tiempo transcurra)
+
+6) variable blacklist como address de mapeo a un bool (Para no dejar que ciertas direcciónes puedan participar)
+
+7) Función que permita al contrato 1 y solo a este pushear personas en el array de clientesLujo. El valor que debe poner en wallet es el de la EOA que hizo la transacción.
+Tambien debo verificar que esta wallet no esté en la blacklist (Usar modificadores).
+
+8) Función para agregar direcciónes a la blacklist que solo el Owner pueda.
+
+9) Funcion que me permita preguntar por nombre si una persona fue ganadora de la lotería.
+
+10) funcion lectura del array
+
+11) Función psudo-random para calcular numeros aleatorios (Pensar luego como veloverla "almost fair")
+
+12) Funcion para preguntar si ya se cumplió el tiempo.
+
+13) Funcion para modificar el semaforo si es que ya se cumplió el tiempo. (La función anterior está para preguntar sin gastar gas y unicamente llamar a esta cuando sea necesario y no recurrentemente)
+
+14) Función para determinar ganador de la lotería. La misma debe comprobar que el estado semaforo se encuentre en verde. Determina el valor de la lotería con la funcion random y le manda los ethers Pero antes comprueba de que el address no sea el address nulo.
+
+15) Crear una función que recorrá todos las posiciones del array clientesLujo y que elimine una determinada billetera. Verificar que la misma no se quede sin gas mientras recorre todo el arrayy en caso de
+quedarse sin gas corte recordando por donde iba analizando para luego retomar desde ese punto. Para esto agregar todas las variables de estado que hagan falta.
