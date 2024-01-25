@@ -1,18 +1,60 @@
 Nota: Cuando los videos usen código, en la descripción podrán encontrar el link al github.
 
 
+
+Bases de la blockchain
+
+Computer Systems Established, Maintained, and Trusted by Mutually Suspicious Groups, David Chaun
+https://nakamotoinstitute.org/static/docs/computer-systems-by-mutually-suspicious-groups.pdf
+Este es el paper de donde sale la idea de blockchain para mantener un sistema informatico en el que podamos confiar
+sin necesidad de confiar en las personas que lo mantienen.
+
+https://www.investopedia.com/tech/were-there-cryptocurrencies-bitcoin/
+Acá podemos leer un poco de historia de las criptomonedas antes del bitcoin.
+
+https://nakamotoinstitute.org/formalizing-securing-relationships/
+Smart contral por szabo. el creador de la idea.
+
+
+
+
 		Cryptografía
 
 Video del taller = https://youtu.be/lEX-yyiTHRY
 Reto propuesto   = https://curso-blockchain.tk/tarea2/
+github = https://github.com/DigiCris/Taller_criptografia_y_wallets
+
+Firma electrónica = https://github.com/DigiCris/EducationIT/blob/main/clase1/criptografia_asimetrica/encrypt_decrypt_teoria.php
 
 
-		Blockchain
+
+		Practicar conceptos teóricos de Blockchain visualmente
 
 Utilidad para entender conceptos de blockchain = https://andersbrownworth.com/blockchain/hash
+
+firma electronica y blockchain = https://andersbrownworth.com/blockchain/public-private-keys/keys
+
+
 
 
 		Creación de criptomoneda minable + Uso de Metamask y otras wallets
 
 Lista de reproduccion (50 min) = https://www.youtube.com/playlist?list=PL5b3e4da2IHBvjQkNlx0IeAl2sFx79D0r
 
+
+
+
+
+Creacion de una paper wallet
+
+
+random number
+https://www.browserling.com/tools/random-hex
+
+cmd
+cd C:\Python27
+python.exe ECDSA.py 43da3efd9da95f54c92217a4a652e88da3f5847fc5207a2a193bd9bdfac586ca
+https://emn178.github.io/online-tools/keccak_256.html
+public= 03ca88aca0e50ba033f8317b82f08ab425b08a10246f80aeec31c752354b1ee1d578c75db7e6d9d70bae3d06936e5bb5f14f5d62930e46c31fb60b0580903376
+address= 0x71817b760c67fcc63f77f701824a817db8df373c
+         0x71817b760c67fcc63f77F701824A817DB8df373C
